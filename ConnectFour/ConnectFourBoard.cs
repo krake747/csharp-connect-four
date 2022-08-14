@@ -1,6 +1,4 @@
-﻿
-
-
+﻿namespace ConnectFour;
 
 public class ConnectFourBoard : IBoard
 {

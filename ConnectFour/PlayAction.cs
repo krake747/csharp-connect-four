@@ -1,4 +1,6 @@
-﻿public class PlayAction : IAction
+﻿namespace ConnectFour;
+
+public class PlayAction : IAction
 {
     public void Run()
     {

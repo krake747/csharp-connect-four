@@ -1,4 +1,6 @@
-﻿public enum Cell
+﻿namespace ConnectFour;
+
+public enum Cell
 {
     Empty,
     O,

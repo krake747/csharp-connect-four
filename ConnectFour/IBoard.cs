@@ -1,4 +1,5 @@
-﻿public interface IBoard
+﻿namespace ConnectFour;
+public interface IBoard
 {
     int Columns { get; }
     GridCell[,] Grid { get; }

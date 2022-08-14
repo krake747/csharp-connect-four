@@ -1,4 +1,6 @@
-﻿public interface IPlayer
+﻿namespace ConnectFour;
+
+public interface IPlayer
 {
     IAction ChooseAction();
 }

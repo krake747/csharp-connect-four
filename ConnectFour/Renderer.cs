@@ -1,5 +1,7 @@
 ﻿using System.Text;
 
+namespace ConnectFour;
+
 public class Renderer
 {
     private const string RowSeperator = "||---+---+---+---+---+---||";
