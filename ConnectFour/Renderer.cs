@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace ConnectFour;
+﻿namespace ConnectFour;
 
 public class Renderer
 {
@@ -8,16 +6,17 @@ public class Renderer
     public void Render(ConnectFourBoard board)
     {
         var grid = board.Grid;
-        Console.WriteLine($"{RowSeperator}");
         for (var row = 0; row < board.Rows; row++)
         {
-            var sb = new StringBuilder();
+            Console.WriteLine($"{RowSeperator}");
+            Console.Write($"|");
             for (var col = 0; col < board.Columns; col++)
             {
-                sb.Append($"| {RenderCell(grid[row, col].Cell)} ");
+                var cell = grid[row, col];
+                
+                Console.Write($"| {RenderCell(cell.Cell)} ", cell.Color);
             }
-            Console.WriteLine($"|{sb}||");
-            Console.WriteLine($"{RowSeperator}");
+            Console.WriteLine($"||");
         }
         Console.WriteLine($"||=======================||");
         Console.WriteLine();
