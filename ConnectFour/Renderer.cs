@@ -17,7 +17,7 @@ public class Renderer
             Console.WriteLine($"|{sb}||");
             Console.WriteLine($"{RowSeperator}");
         }
-        Console.WriteLine($"||========================||");
+        Console.WriteLine($"||=======================||");
         Console.WriteLine();
     }
 
