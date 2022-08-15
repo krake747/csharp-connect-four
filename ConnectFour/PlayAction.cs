@@ -4,17 +4,18 @@ public class PlayAction : IAction
 {
     public void Run(Game game, IPlayer player)
     {
-        var column = PromptChoice();
+        var column = PromptChoice(player);
         var board = game.Board;
         board.DropCoin(player, column);
     }
 
-    private static int PromptChoice()
+    private static int PromptChoice(IPlayer player)
     {
         int result;
         do
         {
-            Console.WriteLine("Select a column to drop your coin in: (Keyboard Keys: 1, 2, 3, 4, 5, 6)");
+            ColoredConsole.Write($"{player.Name} ", player.Color.ToConsoleColor());
+            Console.WriteLine($"- Select a column to drop your coin in: (Keyboard Keys: 1, 2, 3, 4, 5, 6)");
             result = Console.ReadKey(true).Key switch
             {
                 ConsoleKey.D1 or ConsoleKey.NumPad1 => 0,
