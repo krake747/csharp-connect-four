@@ -2,7 +2,7 @@
 
 public class ConnectFourBoard : IBoard
 {
-    public GridCell[,] Grid { get; } = new GridCell[7, 6];
+    public GridCell[,] Grid { get; } = new GridCell[6, 7];
     public int Rows => Grid.GetLength(0);
     public int Columns => Grid.GetLength(1);
 

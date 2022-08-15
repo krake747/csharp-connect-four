@@ -2,7 +2,7 @@
 
 public class Renderer
 {
-    private const string RowSeperator = "||---+---+---+---+---+---||";
+    private const string RowSeperator = "||---+---+---+---+---+---+---||";
     public void Render(Game game)
     {
         var grid = game.Board.Grid;
@@ -22,8 +22,8 @@ public class Renderer
             }
             Console.WriteLine($"||");
         }
-        Console.WriteLine($"||=======================||");
-        Console.WriteLine($"||(1)+(2)+(3)+(4)+(5)+(6)||");
+        Console.WriteLine($"||===========================||");
+        Console.WriteLine($"||(1)+(2)+(3)+(4)+(5)+(6)+(7)||");
         Console.WriteLine();
     }
 
