@@ -25,11 +25,10 @@ public class ConnectFourBoard : IBoard
     }
 
     public GridCell[] GetColumn(int columnNumber) => Enumerable.Range(0, Grid.GetLength(0))
-                                                               .Select(c => Grid[c, columnNumber])
+                                                               .Select(cell => Grid[cell, columnNumber])
                                                                .ToArray();
-    
-    public GridCell[] GetRow(int rowNumber) => Enumerable.Range(0, Grid.GetLength(1))
-                                                         .Select(r => Grid[rowNumber, r])
-                                                         .ToArray();
 
+    public GridCell[] GetRow(int rowNumber) => Enumerable.Range(0, Grid.GetLength(1))
+                                                         .Select(cell => Grid[rowNumber, cell])
+                                                         .ToArray();
 }

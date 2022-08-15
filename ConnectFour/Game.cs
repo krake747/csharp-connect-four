@@ -12,12 +12,12 @@ public class Game
     {
         Player1 = player1;
         Player2 = player2;
-        _winChecker = new WinChecker(this);
+        _winChecker = new WinChecker(Board);
     }
     
     public void Run()
     {
-        Greeting();
+        GreetingMessage();
         _renderer.Render(this);
 
         var group = new List<IPlayer> { Player1, Player2 };
@@ -27,11 +27,15 @@ public class Game
             {
                 player.ChooseAction(this, player).Run(this, player);
                 _renderer.Render(this);
-            }
+                _winChecker.Check(player);
 
-            break;
+                if (IsOver) break;
+            }
         }
+
+        WinningMessage();
     }
 
-    private void Greeting() => Console.WriteLine($"Welcome {Player1.Name}, {Player2.Name} to Connect Four!");
+    private void GreetingMessage() => ColoredConsole.WriteInfo($"Welcome {Player1.Name}, {Player2.Name} to Connect Four!");
+    private void WinningMessage() => ColoredConsole.WriteSuccess($"Grats {_winChecker.Winner?.Name} for winning Connect Four!");
 }
