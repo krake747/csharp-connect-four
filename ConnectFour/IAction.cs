@@ -2,5 +2,5 @@
 
 public interface IAction
 {
-    void Run();
+    void Run(Game game, IPlayer player);
 }

@@ -2,5 +2,7 @@
 
 public interface IPlayer
 {
-    IAction ChooseAction();
+    string? Name { get; init; }
+    PlayerColor Color { get; init; }
+    IAction ChooseAction(Game game, IPlayer player);
 }
