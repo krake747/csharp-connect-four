@@ -7,7 +7,7 @@ public class PlayAction : IAction
         var board = game.Board;
         var columnNumber = PromptChoice(board, player);
         
-        board.DropCoin(player, columnNumber);
+        board.DroppingCoin(player, columnNumber);
     }
 
     private static int PromptChoice(ConnectFourBoard board, IPlayer player)

@@ -13,7 +13,7 @@ public class ConnectFourBoard : IBoard
                 Grid[row, col] = new GridCell();
     }
 
-    public void DropCoin(IPlayer player, int columnNumber)
+    public void DroppingCoin(IPlayer player, int columnNumber)
     {
         for (var row = Rows - 1; row >= 0; row--)
         {
