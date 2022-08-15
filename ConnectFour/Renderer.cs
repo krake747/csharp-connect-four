@@ -15,8 +15,10 @@ public class Renderer
             Console.Write($"|");
             for (var col = 0; col < cols; col++)
             {
-                var cell = grid[row, col];     
-                Console.Write($"| {RenderCell(cell.Cell)} ", cell.Color);
+                var cell = grid[row, col];
+                Console.Write($"| ");
+                ColoredConsole.Write($"{RenderCell(cell.Cell)}", cell.Color);
+                Console.Write($" ");
             }
             Console.WriteLine($"||");
         }

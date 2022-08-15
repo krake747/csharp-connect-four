@@ -13,13 +13,13 @@ public class ConnectFourBoard : IBoard
                 Grid[row, col] = new GridCell();
     }
 
-    public void DropCoin(int columnNumber)
+    public void DropCoin(IPlayer player, int columnNumber)
     {
         for (var row = Rows - 1; row >= 0; row--)
         {
             if (Grid[row, columnNumber].Cell != Cell.Empty) continue;
             
-            Grid[row, columnNumber] = new GridCell() { Cell = Cell.O, Color = ConsoleColor.Green };
+            Grid[row, columnNumber] = new GridCell() { Cell = Cell.O, Color = player.Color.ToConsoleColor() };
             break;
         }
     }

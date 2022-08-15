@@ -5,7 +5,8 @@ public class PlayAction : IAction
     public void Run(Game game, IPlayer player)
     {
         var column = PromptChoice();
-        DropCoin(game, player, column);
+        var board = game.Board;
+        board.DropCoin(player, column);
     }
 
     private static int PromptChoice()
@@ -26,13 +27,7 @@ public class PlayAction : IAction
             };
         } while (result is -1);
         Console.WriteLine("Dropping coin...");
-        Console.WriteLine($"Coin was dropped into {result}.\n");
+        ColoredConsole.WriteSuccess($"Coin was dropped into {result}.\n");
         return result;
-    }
-
-    private static void DropCoin(Game game, IPlayer player, int column)
-    {
-        var board = game.Board;
-        board.DropCoin(column);
     }
 }
