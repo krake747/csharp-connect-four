@@ -23,17 +23,22 @@ public class Game
         var group = new List<IPlayer> { Player1, Player2 };
         while (!IsOver)
         {
-            foreach (var player in group)
-            {
-                player.ChooseAction(this, player).Run(this, player);
-                _renderer.Render(this);
-                _winChecker.Check(player);
-
-                if (IsOver) break;
-            }
+            RunPlayerAction(group);
         }
 
         WinningMessage();
+    }
+
+    private void RunPlayerAction(List<IPlayer> group)
+    {
+        foreach (var player in group)
+        {
+            player.ChooseAction(this, player).Run(this, player);
+            _renderer.Render(this);
+            _winChecker.Check(player);
+
+            if (IsOver) break;
+        }
     }
 
     private void GreetingMessage() => ColoredConsole.WriteInfo($"Welcome {Player1.Name}, {Player2.Name} to Connect Four!");
