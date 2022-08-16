@@ -248,11 +248,10 @@ public class WinChecker
 
     private void SetWinner(IPlayer player, int countConsecutiveCoins)
     {
-        if (countConsecutiveCoins == ConnectFour)
-        {
-            Winner = player;
-            IsOver = true;
-        }
+        if (countConsecutiveCoins != ConnectFour) return;
+        
+        Winner = player;
+        IsOver = true;
     }
 }
 

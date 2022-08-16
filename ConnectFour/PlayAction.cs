@@ -24,9 +24,6 @@ public class PlayAction : IAction
 
         } while (columnNumber is -1 || isColumnFull);
 
-        Console.WriteLine("Dropping coin...");
-        ColoredConsole.WriteSuccess($"Coin was dropped into column {columnNumber}.\n");
-
         return columnNumber;
     }
 
@@ -51,12 +48,10 @@ public class PlayAction : IAction
 
         var column = board.GetColumn(columnNumber);
         bool isColumnFull = column.All(cell => cell.Cell == Cell.O);
+        
+        if (!isColumnFull) return false;
 
-        if (isColumnFull)
-        {
-            ColoredConsole.WriteWarning($"Column {columnNumber} is full. Please choose another column...");
-        }
-
+        ColoredConsole.WriteWarning($"Column #{columnNumber} is full. Please choose another column...");
         return isColumnFull;
     }
 }

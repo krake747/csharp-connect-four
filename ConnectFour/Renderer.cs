@@ -15,7 +15,7 @@ public class Renderer
             RenderRow(grid, cols, row);
         }
         Console.WriteLine($"||===========================||");
-        Console.WriteLine($"||(1)+(2)+(3)+(4)+(5)+(6)+(7)||");
+        ColoredConsole.WriteWarning($"  (1) (2) (3) (4) (5) (6) (7)  ");
         Console.WriteLine();
     }
 
