@@ -6,7 +6,7 @@ public class PlayAction : IAction
     {
         var board = game.Board;
         var columnNumber = PromptChoice(board, player);
-        
+
         board.DroppingCoin(player, columnNumber);
     }
 
@@ -48,15 +48,15 @@ public class PlayAction : IAction
     private static bool IsColumnFull(ConnectFourBoard board, int columnNumber)
     {
         if (columnNumber is -1) return true;
-        
+
         var column = board.GetColumn(columnNumber);
         bool isColumnFull = column.All(cell => cell.Cell == Cell.O);
-        
+
         if (isColumnFull)
         {
             ColoredConsole.WriteWarning($"Column {columnNumber} is full. Please choose another...");
         }
-            
+
         return isColumnFull;
     }
 }

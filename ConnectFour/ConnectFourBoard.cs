@@ -18,7 +18,7 @@ public class ConnectFourBoard : IBoard
         for (var row = Rows - 1; row >= 0; row--)
         {
             if (Grid[row, columnNumber].Cell != Cell.Empty) continue;
-            
+
             Grid[row, columnNumber] = new GridCell() { Cell = Cell.O, Color = player.Color.ToConsoleColor() };
             break;
         }

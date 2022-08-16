@@ -17,7 +17,7 @@ public class Game
         _winChecker = new WinChecker(this);
         DisplayBoard += RenderBoard;
     }
-    
+
     public void Run()
     {
         GreetingMessage();
@@ -38,13 +38,13 @@ public class Game
         {
             player.ChooseAction(this, player).Run(this, player);
             DisplayBoard.Invoke();
-            _winChecker.Check(player);
+            _winChecker.IsConnectFour(player);
 
             if (IsOver) break;
         }
     }
 
-    private void RenderBoard() 
+    private void RenderBoard()
     {
         Console.Clear();
         ColoredConsole.WriteInfo($"Turn #{++_turnCount}");

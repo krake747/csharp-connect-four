@@ -35,21 +35,21 @@ public static class ColoredConsole
     /// </summary>
     /// <param name="text"></param>
     public static void WriteSuccess(string text) => WriteLine(text, ConsoleColor.Green);
-    
+
 
     /// <summary>
     /// Write an Error Line in Red.
     /// </summary>
     /// <param name="text"></param>
     public static void WriteError(string text) => WriteLine(text, ConsoleColor.Red);
-    
+
 
     /// <summary>
     /// Write a Warning Line in Dark Yellow
     /// </summary>
     /// <param name="text"></param>
     public static void WriteWarning(string text) => WriteLine(text, ConsoleColor.DarkYellow);
-    
+
 
 
     /// <summary>
@@ -57,7 +57,7 @@ public static class ColoredConsole
     /// </summary>
     /// <param name="text"></param>
     public static void WriteInfo(string text) => WriteLine(text, ConsoleColor.DarkCyan);
-    
+
 
 
     /// <summary>
