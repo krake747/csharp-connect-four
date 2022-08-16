@@ -3,9 +3,10 @@
 public class WinChecker
 {
     private const int ConnectFour = 4;
+    private readonly ConnectFourBoard _board;
     private ConsoleColor _playerColor;
-    private ConnectFourBoard _board;
     public bool IsOver;
+    public List<Coordinate> GridCoordinates = new List<Coordinate>(4);
     public IPlayer? Winner;
     public WinChecker(Game game)
     {
@@ -26,6 +27,7 @@ public class WinChecker
     {
         for (var col = 0; col < _board.Columns; col++)
         {
+            if (IsOver) return;
             CheckColumn(player, col);
         }
     }
@@ -34,19 +36,23 @@ public class WinChecker
     {
         int countConsecutiveCoins = 0;
         var column = _board.GetColumn(columNumber);
-        for (int r = _board.Rows - 1; r >= 0; r--)
+        for (int row = _board.Rows - 1; row >= 0; row--)
         {
-            var cell = column[r];
+            if (IsOver) return;
+            var cell = column[row];
 
             if (cell.Cell == Cell.Empty) break;
 
             if (cell.Color != _playerColor)
             {
                 countConsecutiveCoins = 0;
+                GridCoordinates.Clear();
                 continue;
             }
 
             SetWinner(player, ++countConsecutiveCoins);
+            var coordinate = new Coordinate(row, columNumber);
+            AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
         }
     }
 
@@ -54,6 +60,7 @@ public class WinChecker
     {
         for (var row = _board.Rows - 1; row >= 0; row--)
         {
+            if (IsOver) return;
             CheckRow(player, row);
         }
     }
@@ -62,23 +69,28 @@ public class WinChecker
     {
         int countConsecutiveCoins = 0;
         var row = _board.GetRow(rowNumber);
-        for (int c = 0; c < _board.Columns; c++)
+        for (int col = 0; col < _board.Columns; col++)
         {
-            var cell = row[c];
+            if (IsOver) return;
+            var cell = row[col];
 
             if (cell.Cell == Cell.Empty)
             {
                 countConsecutiveCoins = 0;
+                GridCoordinates.Clear();
                 break;
             }
 
             if (cell.Color != _playerColor)
             {
                 countConsecutiveCoins = 0;
+                GridCoordinates.Clear();
                 continue;
             }
 
             SetWinner(player, ++countConsecutiveCoins);
+            var coordinate = new Coordinate(rowNumber, col);
+            AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
         }
     }
 
@@ -97,6 +109,7 @@ public class WinChecker
     {
         for (int diagonal = 0; diagonal < _board.Rows / 2; diagonal++)
         {
+            if (IsOver) return;
             CheckBelowDiagonal(player, diagonal);
         }
     }
@@ -108,6 +121,7 @@ public class WinChecker
         {
             for (int col = 0; col < _board.Columns - 1; col++)
             {
+                if (IsOver) return;
                 if (row != col) continue;
 
                 int selectedRow = diagonal + row;
@@ -118,16 +132,20 @@ public class WinChecker
                 if (cell.Cell == Cell.Empty)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     break;
                 }
 
                 if (cell.Color != _playerColor)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     continue;
                 }
 
                 SetWinner(player, ++countConsecutiveCoins);
+                var coordinate = new Coordinate(selectedRow, col);
+                AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
             }
         }
     }
@@ -136,6 +154,7 @@ public class WinChecker
     {
         for (int diagonal = 0; diagonal < _board.Columns / 2; diagonal++)
         {
+            if (IsOver) return;
             CheckAboveDiagonal(player, diagonal);
         }
     }
@@ -147,6 +166,7 @@ public class WinChecker
         {
             for (int col = 0; col <= _board.Columns; col++)
             {
+                if (IsOver) return;
                 if (row != col) continue;
 
                 int selectedCol = diagonal + col + 1;
@@ -156,16 +176,20 @@ public class WinChecker
                 if (cell.Cell == Cell.Empty)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     break;
                 }
 
                 if (cell.Color != _playerColor)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     continue;
                 }
 
                 SetWinner(player, ++countConsecutiveCoins);
+                var coordinate = new Coordinate(row, selectedCol);
+                AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
             }
         }
     }
@@ -174,6 +198,7 @@ public class WinChecker
     {
         for (int diagonal = 0; diagonal < _board.Rows / 2; diagonal++)
         {
+            if (IsOver) return;
             CheckAboveAntiDiagonal(player, diagonal);
         }
     }
@@ -185,6 +210,7 @@ public class WinChecker
         {
             for (int col = 0; col < _board.Columns; col++)
             {
+                if (IsOver) return;
                 if (row + col != _board.Rows - 1) continue;
 
                 int selectedRow = row - diagonal;
@@ -194,16 +220,20 @@ public class WinChecker
                 if (cell.Cell == Cell.Empty)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     break;
                 }
 
                 if (cell.Color != _playerColor)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     continue;
                 }
 
                 SetWinner(player, ++countConsecutiveCoins);
+                var coordinate = new Coordinate(selectedRow, col);
+                AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
             }
         }
     }
@@ -212,6 +242,7 @@ public class WinChecker
     {
         for (int diagonal = 0; diagonal < _board.Columns / 2; diagonal++)
         {
+            if (IsOver) return;
             CheckBelowAntiDiagonal(player, diagonal);
         }
     }
@@ -223,6 +254,7 @@ public class WinChecker
         {
             for (int col = 1; col <= _board.Columns; col++)
             {
+                if (IsOver) return;
                 if (row + col != _board.Rows) continue;
 
                 int selectedCol = diagonal + col;
@@ -232,16 +264,20 @@ public class WinChecker
                 if (cell.Cell == Cell.Empty)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     break;
                 }
 
                 if (cell.Color != _playerColor)
                 {
                     countConsecutiveCoins = 0;
+                    GridCoordinates.Clear();
                     continue;
                 }
 
                 SetWinner(player, ++countConsecutiveCoins);
+                var coordinate = new Coordinate(row, selectedCol);
+                AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
             }
         }
     }
@@ -252,6 +288,15 @@ public class WinChecker
         
         Winner = player;
         IsOver = true;
+    }
+
+    private void AddWinningGridCoordinates(Coordinate coordinate, int countConsecutiveCoins)
+    {
+        if (countConsecutiveCoins > 0)
+        {
+            GridCoordinates.Add(coordinate);
+            GridCoordinates = GridCoordinates.Select(gc => gc).Distinct().ToList();
+        }
     }
 }
 

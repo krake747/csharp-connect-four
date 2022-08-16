@@ -32,13 +32,15 @@ public class Game
         WinningMessage();
     }
 
+    internal List<Coordinate> GetWinningCoordinates() => _winChecker.GridCoordinates;
+
     private void RunPlayerAction(List<IPlayer> group)
     {
         foreach (var player in group)
         {
             player.ChooseAction(this, player).Run(this, player);
-            DisplayBoard.Invoke();
             _winChecker.IsConnectFour(player);
+            DisplayBoard.Invoke();
 
             if (IsOver) break;
         }

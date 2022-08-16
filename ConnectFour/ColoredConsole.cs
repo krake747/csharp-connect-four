@@ -31,6 +31,19 @@ public static class ColoredConsole
     }
 
     /// <summary>
+    /// Writes some text (no new line) in a specific color and in a specific background color
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="color"></param>
+    public static void Write(string text, ConsoleColor color, ConsoleColor backgroundColor)
+    {
+        Console.ForegroundColor = color;
+        Console.BackgroundColor = backgroundColor;
+        Console.Write(text);
+        Console.ResetColor();
+    }
+
+    /// <summary>
     /// Write a Success Line in Green.
     /// </summary>
     /// <param name="text"></param>
