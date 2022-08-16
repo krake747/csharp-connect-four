@@ -54,7 +54,7 @@ public class PlayAction : IAction
 
         if (isColumnFull)
         {
-            ColoredConsole.WriteWarning($"Column {columnNumber} is full. Please choose another...");
+            ColoredConsole.WriteWarning($"Column {columnNumber} is full. Please choose another column...");
         }
 
         return isColumnFull;

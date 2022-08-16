@@ -38,11 +38,7 @@ public class WinChecker
         {
             var cell = column[r];
 
-            if (cell.Cell == Cell.Empty)
-            {
-                countConsecutiveCoins = 0;
-                break;
-            }
+            if (cell.Cell == Cell.Empty) break;
 
             if (cell.Color != _playerColor)
             {
@@ -50,8 +46,7 @@ public class WinChecker
                 continue;
             }
 
-            countConsecutiveCoins++;
-            SetWinner(player, countConsecutiveCoins);
+            SetWinner(player, ++countConsecutiveCoins);
         }
     }
 
@@ -83,8 +78,7 @@ public class WinChecker
                 continue;
             }
 
-            countConsecutiveCoins++;
-            SetWinner(player, countConsecutiveCoins);
+            SetWinner(player, ++countConsecutiveCoins);
         }
     }
 
@@ -133,9 +127,7 @@ public class WinChecker
                     continue;
                 }
 
-                countConsecutiveCoins++;
-                Console.WriteLine($"CheckLowerTriangular #{diagonal} | Grid[row: {selectedRow}, col: {col}], Count: {countConsecutiveCoins}");
-                SetWinner(player, countConsecutiveCoins);
+                SetWinner(player, ++countConsecutiveCoins);
             }
         }
     }
@@ -173,9 +165,7 @@ public class WinChecker
                     continue;
                 }
 
-                countConsecutiveCoins++;
-                Console.WriteLine($"CheckUpperTriangular #{diagonal} | Grid[row: {row}, col: {selectedCol}], Count: {countConsecutiveCoins}");
-                SetWinner(player, countConsecutiveCoins);
+                SetWinner(player, ++countConsecutiveCoins);
             }
         }
     }
@@ -213,9 +203,7 @@ public class WinChecker
                     continue;
                 }
 
-                countConsecutiveCoins++;
-                Console.WriteLine($"CheckUpperAntiDiagonal #{diagonal} | Grid[row: {selectedRow}, col: {col}], Count: {countConsecutiveCoins}");
-                SetWinner(player, countConsecutiveCoins);
+                SetWinner(player, ++countConsecutiveCoins);
             }
         }
     }
@@ -253,9 +241,7 @@ public class WinChecker
                     continue;
                 }
 
-                countConsecutiveCoins++;
-                Console.WriteLine($"CheckLowerAntiDiagonal #{diagonal} | Grid[row: {row}, col: {selectedCol}], Count: {countConsecutiveCoins}");
-                SetWinner(player, countConsecutiveCoins);
+                SetWinner(player, ++countConsecutiveCoins);
             }
         }
     }

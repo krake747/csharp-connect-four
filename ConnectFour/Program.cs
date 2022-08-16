@@ -11,7 +11,7 @@ do
     var game = new Game(player1, player2);
     game.Run();
 
-    Console.Write("Go again? (y/n)");
+    ColoredConsole.WriteInfo("Go again? (y/n)");
     exit = Console.ReadKey(true).Key == ConsoleKey.Y ? true : false;
 
 } while (exit);
