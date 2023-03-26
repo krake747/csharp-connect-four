@@ -1,5 +1,4 @@
-﻿using ConnectFour.App;
-using ConnectFour.Models.Boards;
+﻿using ConnectFour.Models.Boards;
 using ConnectFour.Models.Players;
 
 namespace ConnectFour.App;
@@ -54,7 +53,7 @@ public class WinChecker
                 GridCoordinates.Clear();
                 continue;
             }
-            
+
             SetWinner(player, ++countConsecutiveCoins);
             var coordinate = new Coordinate(row, columNumber);
             AddWinningGridCoordinates(coordinate, countConsecutiveCoins);
