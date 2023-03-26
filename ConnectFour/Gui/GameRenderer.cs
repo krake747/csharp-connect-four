@@ -38,7 +38,7 @@ public static class GameRenderer
             var cell = grid[row, col];
             var idx = new Coordinate(row, col);
             Console.Write("| ");
-            if (coords.Contains(idx))
+            if (coords.Contains(idx) && coords.Count == 4)
                 ColoredConsole.Write($"{RenderCell(cell.Cell)}", cell.Color, ConsoleColor.White);
             else
                 ColoredConsole.Write($"{RenderCell(cell.Cell)}", cell.Color);
