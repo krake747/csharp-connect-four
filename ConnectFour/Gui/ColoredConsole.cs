@@ -1,4 +1,4 @@
-﻿namespace ConnectFour;
+﻿namespace ConnectFour.Gui;
 
 /// <summary>
 ///     A class that provides some convenience methods over the top of the console window for displaying text
@@ -35,6 +35,7 @@ public static class ColoredConsole
     /// </summary>
     /// <param name="text"></param>
     /// <param name="color"></param>
+    /// <param name="backgroundColor"></param>
     public static void Write(string text, ConsoleColor color, ConsoleColor backgroundColor)
     {
         Console.ForegroundColor = color;
@@ -72,7 +73,6 @@ public static class ColoredConsole
         WriteLine(text, ConsoleColor.DarkYellow);
     }
 
-
     /// <summary>
     ///     Write a Info Line in Dark Cyan.
     /// </summary>
@@ -81,7 +81,6 @@ public static class ColoredConsole
     {
         WriteLine(text, ConsoleColor.DarkCyan);
     }
-
 
     /// <summary>
     ///     Asks the user a question and on the same line, gets a reply back, switching the user's response
@@ -93,7 +92,7 @@ public static class ColoredConsole
     {
         Write($"{questionToAsk} ", ConsoleColor.Gray);
         Console.ForegroundColor = ConsoleColor.Cyan;
-        var input = Console.ReadLine() ?? ""; // If we got null, use empty string instead.
+        var input = Console.ReadLine() ?? "";
         Console.ResetColor();
         return input;
     }

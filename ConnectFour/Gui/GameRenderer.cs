@@ -1,15 +1,18 @@
-﻿namespace ConnectFour;
+﻿using ConnectFour.App;
+using ConnectFour.Models.Boards;
 
-public class Renderer
+namespace ConnectFour.Gui;
+
+public static class GameRenderer
 {
-    private const string RowSeperator = "||---+---+---+---+---+---+---||";
+    private const string RowSeparator = "||---+---+---+---+---+---+---||";
 
-    public void Render(Game game)
+    public static void Render(Game game)
     {
         var grid = game.Board.Grid;
         var rows = game.Board.Rows;
         var cols = game.Board.Columns;
-        var coords = game.GetWinningCoordinates();
+        var coords = game.GetWinningCoordinates().ToList();
         RenderBoard(grid, rows, cols, coords);
     }
 
@@ -18,7 +21,7 @@ public class Renderer
         Console.WriteLine();
         for (var row = 0; row < rows; row++)
         {
-            Console.WriteLine($"{RowSeperator}");
+            Console.WriteLine($"{RowSeparator}");
             RenderRow(grid, cols, row, coords);
         }
 
@@ -42,7 +45,8 @@ public class Renderer
             Console.Write(" ");
         }
 
-        Console.WriteLine("||");
+        Console.Write("|| ");
+        ColoredConsole.WriteWarning($"R: {row}");
     }
 
     private static char RenderCell(Cell cell)

@@ -1,4 +1,4 @@
-﻿namespace ConnectFour;
+﻿namespace ConnectFour.Models.Players;
 
 public enum PlayerColor
 {
@@ -14,7 +14,7 @@ public static class PlayerColorExtension
         {
             PlayerColor.Blue => ConsoleColor.Blue,
             PlayerColor.Red => ConsoleColor.Red,
-            _ => throw new NotImplementedException()
+            _ => ConsoleColor.White
         };
     }
 }

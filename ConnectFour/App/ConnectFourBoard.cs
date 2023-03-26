@@ -1,4 +1,7 @@
-﻿namespace ConnectFour;
+﻿using ConnectFour.Models.Boards;
+using ConnectFour.Models.Players;
+
+namespace ConnectFour.App;
 
 public class ConnectFourBoard : IBoard
 {
@@ -19,7 +22,7 @@ public class ConnectFourBoard : IBoard
         {
             if (Grid[row, columnNumber].Cell != Cell.Empty) continue;
 
-            Grid[row, columnNumber] = new GridCell { Cell = Cell.O, Color = player.Color.ToConsoleColor() };
+            Grid[row, columnNumber] = new GridCell { Cell = Cell.Filled, Color = player.Color.ToConsoleColor() };
             break;
         }
     }

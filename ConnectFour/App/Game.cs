@@ -1,29 +1,35 @@
-﻿namespace ConnectFour;
+﻿using ConnectFour.Gui;
+using ConnectFour.Models.Boards;
+using ConnectFour.Models.Players;
+
+namespace ConnectFour.App;
 
 public class Game
 {
-    private readonly Renderer _renderer = new();
+    private readonly Action<Game> _renderer;
     private readonly WinChecker _winChecker;
     private int _turnCount;
 
-    public Game(IPlayer player1, IPlayer player2)
+    public Game(GameSetup setup, Action<Game> renderer)
     {
-        Player1 = player1;
-        Player2 = player2;
+        Player1 = setup.Player1;
+        Player2 = setup.Player2;
+        Board = setup.Board;
+        _renderer = renderer;
         _winChecker = new WinChecker(this);
         DisplayBoard += RenderBoard;
     }
 
     public IPlayer Player1 { get; }
     public IPlayer Player2 { get; }
-    public ConnectFourBoard Board { get; } = new();
+    public ConnectFourBoard Board { get; }
     public bool IsOver => _winChecker.IsOver;
     public event Action DisplayBoard;
 
     public void Run()
     {
         GreetingMessage();
-        _renderer.Render(this);
+        _renderer(this);
 
         var group = new List<IPlayer> { Player1, Player2 };
         while (!IsOver)
@@ -55,7 +61,7 @@ public class Game
     {
         Console.Clear();
         ColoredConsole.WriteInfo($"Turn #{++_turnCount}");
-        _renderer.Render(this);
+        _renderer(this);
     }
 
     private void GreetingMessage()
@@ -65,6 +71,6 @@ public class Game
 
     private void WinningMessage()
     {
-        ColoredConsole.WriteSuccess($"Grats {_winChecker.Winner?.Name} for winning Connect Four!");
+        ColoredConsole.WriteSuccess($"Congrats {_winChecker.Winner?.Name} for winning Connect Four!");
     }
 }

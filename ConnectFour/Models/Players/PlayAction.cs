@@ -1,4 +1,8 @@
-﻿namespace ConnectFour;
+﻿using ConnectFour.App;
+using ConnectFour.Gui;
+using ConnectFour.Models.Boards;
+
+namespace ConnectFour.Models.Players;
 
 public class PlayAction : IAction
 {
@@ -45,8 +49,8 @@ public class PlayAction : IAction
     {
         if (columnNumber is -1) return true;
 
-        var column = board.GetColumn(columnNumber);
-        var isColumnFull = column.All(cell => cell.Cell == Cell.O);
+        var isColumnFull = board.GetColumn(columnNumber)
+            .All(cell => cell.Cell == Cell.Filled);
 
         if (!isColumnFull) return false;
 

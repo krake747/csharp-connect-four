@@ -1,4 +1,6 @@
-﻿namespace ConnectFour;
+﻿using ConnectFour.App;
+
+namespace ConnectFour.Models.Players;
 
 public interface IAction
 {
