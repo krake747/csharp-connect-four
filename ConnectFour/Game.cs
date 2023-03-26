@@ -2,14 +2,10 @@
 
 public class Game
 {
-    private readonly Renderer _renderer = new Renderer();
+    private readonly Renderer _renderer = new();
     private readonly WinChecker _winChecker;
     private int _turnCount;
-    public IPlayer Player1 { get; }
-    public IPlayer Player2 { get; }
-    public ConnectFourBoard Board { get; } = new ConnectFourBoard();
-    public event Action DisplayBoard;
-    public bool IsOver => _winChecker.IsOver;
+
     public Game(IPlayer player1, IPlayer player2)
     {
         Player1 = player1;
@@ -17,6 +13,12 @@ public class Game
         _winChecker = new WinChecker(this);
         DisplayBoard += RenderBoard;
     }
+
+    public IPlayer Player1 { get; }
+    public IPlayer Player2 { get; }
+    public ConnectFourBoard Board { get; } = new();
+    public bool IsOver => _winChecker.IsOver;
+    public event Action DisplayBoard;
 
     public void Run()
     {
@@ -32,7 +34,10 @@ public class Game
         WinningMessage();
     }
 
-    internal List<Coordinate> GetWinningCoordinates() => _winChecker.GridCoordinates;
+    internal List<Coordinate> GetWinningCoordinates()
+    {
+        return _winChecker.GridCoordinates;
+    }
 
     private void RunPlayerAction(List<IPlayer> group)
     {
@@ -53,6 +58,13 @@ public class Game
         _renderer.Render(this);
     }
 
-    private void GreetingMessage() => ColoredConsole.WriteInfo($"Welcome {Player1.Name}, {Player2.Name} to Connect Four!");
-    private void WinningMessage() => ColoredConsole.WriteSuccess($"Grats {_winChecker.Winner?.Name} for winning Connect Four!");
+    private void GreetingMessage()
+    {
+        ColoredConsole.WriteInfo($"Welcome {Player1.Name}, {Player2.Name} to Connect Four!");
+    }
+
+    private void WinningMessage()
+    {
+        ColoredConsole.WriteSuccess($"Grats {_winChecker.Winner?.Name} for winning Connect Four!");
+    }
 }

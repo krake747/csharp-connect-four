@@ -21,27 +21,32 @@ public class Renderer
             Console.WriteLine($"{RowSeperator}");
             RenderRow(grid, cols, row, coords);
         }
-        Console.WriteLine($"||===========================||");
-        ColoredConsole.WriteWarning($"  (1) (2) (3) (4) (5) (6) (7)  ");
+
+        Console.WriteLine("||===========================||");
+        ColoredConsole.WriteWarning("  (1) (2) (3) (4) (5) (6) (7)  ");
         Console.WriteLine();
     }
 
     private static void RenderRow(GridCell[,] grid, int cols, int row, List<Coordinate> coords)
     {
-        Console.Write($"|");
+        Console.Write("|");
         for (var col = 0; col < cols; col++)
         {
             var cell = grid[row, col];
             var idx = new Coordinate(row, col);
-            Console.Write($"| ");
+            Console.Write("| ");
             if (coords.Contains(idx))
                 ColoredConsole.Write($"{RenderCell(cell.Cell)}", cell.Color, ConsoleColor.White);
             else
                 ColoredConsole.Write($"{RenderCell(cell.Cell)}", cell.Color);
-            Console.Write($" ");
+            Console.Write(" ");
         }
-        Console.WriteLine($"||");
+
+        Console.WriteLine("||");
     }
 
-    private static char RenderCell(Cell cell) => cell == Cell.Empty ? ' ' : 'O';
+    private static char RenderCell(Cell cell)
+    {
+        return cell == Cell.Empty ? ' ' : 'O';
+    }
 }

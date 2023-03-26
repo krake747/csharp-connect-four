@@ -5,9 +5,10 @@ public class WinChecker
     private const int ConnectFour = 4;
     private readonly ConnectFourBoard _board;
     private ConsoleColor _playerColor;
+    public List<Coordinate> GridCoordinates = new(4);
     public bool IsOver;
-    public List<Coordinate> GridCoordinates = new List<Coordinate>(4);
     public IPlayer? Winner;
+
     public WinChecker(Game game)
     {
         _board = game.Board;
@@ -15,7 +16,7 @@ public class WinChecker
 
     public void IsConnectFour(IPlayer player)
     {
-        ConsoleColor previousColor = Console.ForegroundColor;
+        var previousColor = Console.ForegroundColor;
         _playerColor = player.Color.ToConsoleColor();
         ConnectFourInColumns(player);
         ConnectFourInRows(player);
@@ -34,9 +35,9 @@ public class WinChecker
 
     private void CheckColumn(IPlayer player, int columNumber)
     {
-        int countConsecutiveCoins = 0;
+        var countConsecutiveCoins = 0;
         var column = _board.GetColumn(columNumber);
-        for (int row = _board.Rows - 1; row >= 0; row--)
+        for (var row = _board.Rows - 1; row >= 0; row--)
         {
             if (IsOver) return;
             var cell = column[row];
@@ -67,9 +68,9 @@ public class WinChecker
 
     private void CheckRow(IPlayer player, int rowNumber)
     {
-        int countConsecutiveCoins = 0;
+        var countConsecutiveCoins = 0;
         var row = _board.GetRow(rowNumber);
-        for (int col = 0; col < _board.Columns; col++)
+        for (var col = 0; col < _board.Columns; col++)
         {
             if (IsOver) return;
             var cell = row[col];
@@ -107,7 +108,7 @@ public class WinChecker
 
     private void CheckLowerTriangular(IPlayer player)
     {
-        for (int diagonal = 0; diagonal < _board.Rows / 2; diagonal++)
+        for (var diagonal = 0; diagonal < _board.Rows / 2; diagonal++)
         {
             if (IsOver) return;
             CheckBelowDiagonal(player, diagonal);
@@ -116,15 +117,15 @@ public class WinChecker
 
     private void CheckBelowDiagonal(IPlayer player, int diagonal)
     {
-        int countConsecutiveCoins = 0;
-        for (int row = 0; row < _board.Rows; row++)
+        var countConsecutiveCoins = 0;
+        for (var row = 0; row < _board.Rows; row++)
         {
-            for (int col = 0; col < _board.Columns - 1; col++)
+            for (var col = 0; col < _board.Columns - 1; col++)
             {
                 if (IsOver) return;
                 if (row != col) continue;
 
-                int selectedRow = diagonal + row;
+                var selectedRow = diagonal + row;
                 if (selectedRow > _board.Rows - 1) break;
 
                 var cell = _board.Grid[selectedRow, col];
@@ -152,7 +153,7 @@ public class WinChecker
 
     private void CheckUpperTriangular(IPlayer player)
     {
-        for (int diagonal = 0; diagonal < _board.Columns / 2; diagonal++)
+        for (var diagonal = 0; diagonal < _board.Columns / 2; diagonal++)
         {
             if (IsOver) return;
             CheckAboveDiagonal(player, diagonal);
@@ -161,15 +162,15 @@ public class WinChecker
 
     private void CheckAboveDiagonal(IPlayer player, int diagonal)
     {
-        int countConsecutiveCoins = 0;
-        for (int row = 0; row < _board.Rows; row++)
+        var countConsecutiveCoins = 0;
+        for (var row = 0; row < _board.Rows; row++)
         {
-            for (int col = 0; col <= _board.Columns; col++)
+            for (var col = 0; col <= _board.Columns; col++)
             {
                 if (IsOver) return;
                 if (row != col) continue;
 
-                int selectedCol = diagonal + col + 1;
+                var selectedCol = diagonal + col + 1;
                 if (selectedCol > _board.Columns - 1) break;
 
                 var cell = _board.Grid[row, selectedCol];
@@ -196,7 +197,7 @@ public class WinChecker
 
     private void CheckUpperAntiDiagonal(IPlayer player)
     {
-        for (int diagonal = 0; diagonal < _board.Rows / 2; diagonal++)
+        for (var diagonal = 0; diagonal < _board.Rows / 2; diagonal++)
         {
             if (IsOver) return;
             CheckAboveAntiDiagonal(player, diagonal);
@@ -205,15 +206,15 @@ public class WinChecker
 
     private void CheckAboveAntiDiagonal(IPlayer player, int diagonal)
     {
-        int countConsecutiveCoins = 0;
-        for (int row = _board.Rows - 1; row >= 0; row--)
+        var countConsecutiveCoins = 0;
+        for (var row = _board.Rows - 1; row >= 0; row--)
         {
-            for (int col = 0; col < _board.Columns; col++)
+            for (var col = 0; col < _board.Columns; col++)
             {
                 if (IsOver) return;
                 if (row + col != _board.Rows - 1) continue;
 
-                int selectedRow = row - diagonal;
+                var selectedRow = row - diagonal;
                 if (selectedRow < 0) break;
 
                 var cell = _board.Grid[selectedRow, col];
@@ -240,7 +241,7 @@ public class WinChecker
 
     private void CheckLowerAntiDiagonal(IPlayer player)
     {
-        for (int diagonal = 0; diagonal < _board.Columns / 2; diagonal++)
+        for (var diagonal = 0; diagonal < _board.Columns / 2; diagonal++)
         {
             if (IsOver) return;
             CheckBelowAntiDiagonal(player, diagonal);
@@ -249,15 +250,15 @@ public class WinChecker
 
     private void CheckBelowAntiDiagonal(IPlayer player, int diagonal)
     {
-        int countConsecutiveCoins = 0;
-        for (int row = _board.Rows - 1; row >= 0; row--)
+        var countConsecutiveCoins = 0;
+        for (var row = _board.Rows - 1; row >= 0; row--)
         {
-            for (int col = 1; col <= _board.Columns; col++)
+            for (var col = 1; col <= _board.Columns; col++)
             {
                 if (IsOver) return;
                 if (row + col != _board.Rows) continue;
 
-                int selectedCol = diagonal + col;
+                var selectedCol = diagonal + col;
                 if (selectedCol > 6) break;
 
                 var cell = _board.Grid[row, selectedCol];
@@ -285,7 +286,7 @@ public class WinChecker
     private void SetWinner(IPlayer player, int countConsecutiveCoins)
     {
         if (countConsecutiveCoins != ConnectFour) return;
-        
+
         Winner = player;
         IsOver = true;
     }
@@ -299,4 +300,3 @@ public class WinChecker
         }
     }
 }
-
