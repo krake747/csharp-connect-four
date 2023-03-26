@@ -11,10 +11,10 @@ public class PlayAction : IAction
         var board = game.Board;
         var columnNumber = PromptChoice(board, player);
 
-        board.DroppingCoin(player, columnNumber);
+        DroppingCoin(board, player, columnNumber);
     }
 
-    private static int PromptChoice(ConnectFourBoard board, IPlayer player)
+    private static int PromptChoice(IBoard board, IPlayer player)
     {
         bool isColumnFull;
         int columnNumber;
@@ -28,6 +28,17 @@ public class PlayAction : IAction
         } while (columnNumber is -1 || isColumnFull);
 
         return columnNumber;
+    }
+
+    private static void DroppingCoin(IBoard board, IPlayer player, int columnNumber)
+    {
+        for (var row = board.Rows - 1; row >= 0; row--)
+        {
+            if (board.Grid[row, columnNumber].Cell != Cell.Empty) continue;
+
+            board.Grid[row, columnNumber] = new GridCell { Cell = Cell.Filled, Color = player.Color.ToConsoleColor() };
+            break;
+        }
     }
 
     private static int SelectColumn()
@@ -45,7 +56,7 @@ public class PlayAction : IAction
         };
     }
 
-    private static bool IsColumnFull(ConnectFourBoard board, int columnNumber)
+    private static bool IsColumnFull(IBoard board, int columnNumber)
     {
         if (columnNumber is -1) return true;
 

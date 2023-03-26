@@ -1,9 +1,9 @@
 ﻿namespace ConnectFour.Models.Boards;
 
-public class GridCell
+public record GridCell
 {
-    public Cell Cell { get; set; } = Cell.Empty;
-    public ConsoleColor Color { get; set; } = ConsoleColor.White;
+    public Cell Cell { get; init; } = Cell.Empty;
+    public ConsoleColor Color { get; init; } = ConsoleColor.White;
 
     public override string ToString()
     {

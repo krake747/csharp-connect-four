@@ -15,18 +15,7 @@ public class ConnectFourBoard : IBoard
     public GridCell[,] Grid { get; } = new GridCell[6, 7];
     public int Rows => Grid.GetLength(0);
     public int Columns => Grid.GetLength(1);
-
-    public void DroppingCoin(IPlayer player, int columnNumber)
-    {
-        for (var row = Rows - 1; row >= 0; row--)
-        {
-            if (Grid[row, columnNumber].Cell != Cell.Empty) continue;
-
-            Grid[row, columnNumber] = new GridCell { Cell = Cell.Filled, Color = player.Color.ToConsoleColor() };
-            break;
-        }
-    }
-
+    
     public GridCell[] GetColumn(int columnNumber)
     {
         return Enumerable.Range(0, Rows)

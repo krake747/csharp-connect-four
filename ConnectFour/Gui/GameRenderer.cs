@@ -16,7 +16,7 @@ public static class GameRenderer
         RenderBoard(grid, rows, cols, coords);
     }
 
-    private static void RenderBoard(GridCell[,] grid, int rows, int cols, List<Coordinate> coords)
+    private static void RenderBoard(GridCell[,] grid, int rows, int cols, ICollection<Coordinate> coords)
     {
         Console.WriteLine();
         for (var row = 0; row < rows; row++)
@@ -30,7 +30,7 @@ public static class GameRenderer
         Console.WriteLine();
     }
 
-    private static void RenderRow(GridCell[,] grid, int cols, int row, List<Coordinate> coords)
+    private static void RenderRow(GridCell[,] grid, int cols, int row, ICollection<Coordinate> coords)
     {
         Console.Write("|");
         for (var col = 0; col < cols; col++)

@@ -40,7 +40,7 @@ public class Game
         WinningMessage();
     }
 
-    internal List<Coordinate> GetWinningCoordinates()
+    internal IEnumerable<Coordinate> GetWinningCoordinates()
     {
         return _winChecker.GridCoordinates;
     }
